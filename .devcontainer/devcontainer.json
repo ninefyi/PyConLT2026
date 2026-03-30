@@ -1,0 +1,30 @@
+{
+  "name": "pyconlt2026-rag-talk",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/20260410_PyConLT2026",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "davidanson.vscode-markdownlint",
+        "marp-team.marp-vscode",
+        "ms-python.python"
+      ],
+      "settings": {
+        "markdown.preview.breaks": true,
+        "markdownlint.config": {
+          "default": true,
+          "MD013": false,
+          "MD025": false,
+          "MD033": false,
+          "MD041": false
+        },
+        "python.defaultInterpreterPath": "/usr/local/python/current/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt && python demo_hybrid_rag.py && markdownlint --config .markdownlint.json slides.md && marp --version && marp slides.md --allow-local-files --html --output /tmp/slides.html",
+  "remoteUser": "codespace"
+}

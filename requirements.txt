@@ -1,0 +1,5 @@
+# Embedding model
+voyageai>=0.3.2
+
+# LangChain core (used in slide code snippets)
+langchain-core>=0.3.0
