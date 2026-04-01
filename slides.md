@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: default
+math: katex
 paginate: true
 size: 16:9
 title: "Beyond Basic RAG: Boosting Accuracy with Hybrid Search and Fusion Algorithms"
@@ -495,6 +496,36 @@ What it improves:
 
 ---
 
+# Re-ranking: How the Score Works
+
+A cross-encoder reads **query + document together**, then outputs one relevance score:
+
+$$
+score = CrossEncoder(query,\; document)
+$$
+
+- Higher score → more relevant
+- Unlike vector search, it sees **both texts at once**
+- Captures phrase match, context, and intent together
+
+---
+
+# Re-ranking: Worked Example
+
+**Query:** `Which algorithm merges ranked lists without comparing raw scores?`
+
+| # | Document snippet | Score |
+| --- | --- | --- |
+| 1 | *"RRF combines ranked lists without raw scores"* | **9.4** |
+| 2 | *"BM25 finds exact keyword matches"* | 4.1 |
+| 3 | *"RSF uses normalized scores with weights"* | 3.8 |
+
+**Result:** Doc 1 is promoted to the top.
+
+**Key insight:** Re-ranking surfaces the best chunk that retrieval alone might bury.
+
+---
+
 # Using Voyage AI for Re-ranking
 
 ```python
@@ -600,29 +631,6 @@ hybrid retrieval is usually worth it.
 
 ---
 
-# Suggested Message to Remember
-
-> Do not ask the LLM to fix weak retrieval.
->
-> Fix retrieval first.
-
-That means:
-
-- better candidate recall
-- better ranking
-- better grounding
-- better answers
-
----
-
 # Q&A
 
 Thank you.
-
-Topics we can discuss:
-
-- LangChain implementation choices
-- chunking strategy
-- when to use RRF vs. RSF
-- vector database options
-- evaluation for retrieval quality

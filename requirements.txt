@@ -3,3 +3,9 @@ voyageai>=0.3.2
 
 # LangChain core (used in slide code snippets)
 langchain-core>=0.3.0
+
+# MongoDB notebooks
+pymongo>=4.6.0
+langchain-mongodb>=0.2.0
+python-dotenv>=1.0.0
+ipykernel>=6.0.0

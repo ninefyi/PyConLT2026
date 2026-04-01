@@ -1,80 +1,95 @@
-# Beyond Basic RAG: Hybrid Search with Fusion and Re-ranking
+# Beyond Basic RAG: Hybrid Search, Fusion, and Re-ranking
 
-A concise demo project for improving Retrieval-Augmented Generation (RAG) quality using hybrid retrieval, Reciprocal Rank Fusion (RRF), and re-ranking.
+This repository contains PyCon LT 2026 demo materials for building higher-accuracy Retrieval-Augmented Generation (RAG) with MongoDB Atlas, Voyage AI, and LangChain.
 
 ## Overview
 
-This repository demonstrates a practical RAG pipeline:
+The project demonstrates two practical hybrid RAG patterns:
 
-- Keyword retrieval for exact terms
-- Vector retrieval for semantic similarity
-- RRF to combine ranked lists
-- Re-ranking for better final context
+1. Native MongoDB Atlas `$rankFusion` + Voyage AI re-ranking.
+1. Manual hybrid retrieval (`$search` + LangChain vector retrieval) + Python RRF + Voyage AI re-ranking.
 
-The demo runs with Voyage AI models when `VOYAGE_API_KEY` is set, and falls back to local token-overlap scoring when it is not.
+Both notebook flows include at least 10 examples and are designed to run safely in GitHub Codespaces.
 
-## Project Files
+## Project Structure
 
-- `demo_hybrid_rag.py`: End-to-end hybrid RAG demo
-- `requirements.txt`: Python dependencies
-- `slides.md`: Marp presentation deck
-- `.devcontainer/`: Containerized dev setup
+- `01_hybrid_rag_rankfusion.ipynb`: Notebook 1 using Atlas `$rankFusion`.
+- `02_hybrid_rag_manual_rrf.ipynb`: Notebook 2 using manual RRF.
+- `slides.md`: Marp slide deck used for the talk.
+- `requirements.txt`: Python package dependencies.
+- `.devcontainer/devcontainer.json`: Dev container configuration.
+- `.devcontainer/Dockerfile`: Dev container base image and tooling.
 
 ## Prerequisites
 
-- Python 3.10+
-- pip
-- Optional: Voyage AI API key
+- Python 3.10+ (virtual environment recommended)
+- MongoDB Atlas cluster
+- Voyage AI API key
 
-## Quick Start
+## Environment Variables
 
-1. Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-1. Optional: set API key for real embedding and reranking:
+Set these before running the notebooks:
 
 ```bash
-export VOYAGE_API_KEY="your-api-key"
+export VOYAGE_API_KEY="your-voyage-api-key"
+export MONGODB_URI="your-mongodb-atlas-uri"
 ```
 
-1. Run the demo:
+If either value is missing, notebook cells skip external operations gracefully so execution does not fail.
+
+## Installation
 
 ```bash
-python demo_hybrid_rag.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
-## Expected Output
+## Notebooks
 
-The script prints:
+### Notebook 1: Atlas `$rankFusion`
 
-- Active embedding mode (Voyage or fallback)
-- Active reranker mode (Voyage or fallback)
-- Dataset size and query
-- Top ranked context documents after hybrid retrieval + RRF + re-ranking
+File: `01_hybrid_rag_rankfusion.ipynb`
+
+Flow:
+
+1. Create LangChain documents.
+1. Store vectors with `MongoDBAtlasVectorSearch`.
+1. Run native Atlas `$rankFusion` for keyword + vector fusion.
+1. Re-rank top candidates with Voyage AI `rerank-2.5`.
+
+### Notebook 2: Manual RRF
+
+File: `02_hybrid_rag_manual_rrf.ipynb`
+
+Flow:
+
+1. Keyword retrieval via Atlas `$search`.
+1. Vector retrieval via LangChain `MongoDBAtlasVectorSearch.similarity_search_with_score`.
+1. Manual Reciprocal Rank Fusion (RRF) in Python.
+1. Re-rank final candidates with Voyage AI `rerank-2.5`.
 
 ## Slides
 
-`slides.md` is a Marp deck for the PyCon LT 2026 talk.
+The presentation deck is in `slides.md`.
 
-To export slides:
+Export with Marp:
 
 ```bash
 marp slides.md
 ```
 
-## Dev Container
+## Key Dependencies
 
-The dev container includes Python, markdown linting, and Marp CLI.
-
-See:
-
-- `.devcontainer/devcontainer.json`
-- `.devcontainer/Dockerfile`
+- `voyageai`
+- `langchain-core`
+- `langchain-mongodb`
+- `pymongo`
+- `python-dotenv`
+- `ipykernel`
 
 ## Notes
 
-- RRF is a strong default when retriever score scales are not directly comparable.
-- Re-ranking is most effective after retrieval narrows candidates to a small top-N set.
+- Vector store integration follows LangChain MongoDB Atlas VectorStore patterns.
+- Notebook cells are organized for step-by-step demo delivery.
+- For Atlas search/index setup, ensure your cluster supports the used operators and index definitions.
