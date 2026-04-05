@@ -145,8 +145,6 @@ Example:
 
 Examples:
 
-- `RRF` should not be confused with unrelated text.
-- `SKU-8472-B` must match exactly.
 - `BM25` and `cross-encoder` should not disappear in semantic noise.
 
 ---
@@ -161,7 +159,6 @@ Query:
 Possible failure:
 
 - Vector search retrieves documents about ranking in general.
-- It misses the document that explicitly explains `Reciprocal Rank Fusion`.
 - The generator answers with partial or incorrect reasoning.
 
 ---
