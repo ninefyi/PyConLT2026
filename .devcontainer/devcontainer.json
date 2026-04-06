@@ -1,5 +1,5 @@
 {
-  "name": "pyconlt2026-rag-talk",
+  "name": "PyConLT2026 Talk",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
