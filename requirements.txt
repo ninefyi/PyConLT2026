@@ -2,7 +2,7 @@
 voyageai
 
 # LangChain core (used in slide code snippets)
-langchain-core>
+langchain-core
 
 # MongoDB notebooks
 pymongo
