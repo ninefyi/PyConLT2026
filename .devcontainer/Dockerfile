@@ -1,24 +1,54 @@
-FROM mcr.microsoft.com/devcontainers/universal:2
+# Supports GitHub Codespace with Python, Node.js, MongoDB, and Marp
 
-USER root
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04 
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates curl gnupg \
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+# Install Python 3.14
+RUN apt-get update && apt-get install -y \
+    python3.14 \
+    python3.14-venv \
+    python3.14-dev \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.14 as default
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.14 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 1
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# Install Node.js 20 LTS (required for modern Marp CLI)
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends nodejs \
-    && npm config set update-notifier false \
-    && npm install -g markdownlint-cli@0.44.0 @marp-team/marp-cli@4.1.2 \
-    && apt-get clean \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-USER codespace
+# Install Marp CLI globally
+RUN npm install -g @marp-team/marp-cli
 
-WORKDIR /workspaces
+# Install additional system utilities
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    wget \
+    jq \
+    make \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /workspace
+
