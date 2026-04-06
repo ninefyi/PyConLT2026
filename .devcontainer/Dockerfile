@@ -17,15 +17,14 @@ RUN apt-get update && apt-get install -y \
     python3.14 \
     python3.14-venv \
     python3.14-dev \
-    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Set Python 3.14 as default
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.14 1 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 1
+# Set Python 3.14 as default for `python` only (keep system `python3` intact)
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.14 1
 
-# Upgrade pip
-RUN python -m pip install --upgrade pip setuptools wheel
+# Bootstrap and upgrade pip for Python 3.14
+RUN python3.14 -m ensurepip --upgrade && \
+    python3.14 -m pip install --no-cache-dir --upgrade pip setuptools wheel
 
 # Install Node.js 20 LTS (required for modern Marp CLI)
 RUN apt-get update && apt-get install -y \
