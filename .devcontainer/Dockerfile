@@ -40,6 +40,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install Marp CLI globally
 RUN npm install -g @marp-team/marp-cli
+RUN npm install -g markdownlint-cli
 
 # Install additional system utilities
 RUN apt-get update && apt-get install -y \

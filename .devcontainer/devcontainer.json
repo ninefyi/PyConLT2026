@@ -30,6 +30,6 @@
       }
     }
   },
-  "postCreateCommand": "pip install -r requirements.txt && markdownlint --config .markdownlint.json slides.md && marp --version && marp slides.md --allow-local-files --html --output /tmp/slides.html",
+  "postCreateCommand": "pip install -r requirements.txt && markdownlint --config .markdownlint.json slides.md && marp --version && marp slides.md --allow-local-files --html --output /workspaces/PyConLT2026/slides.html",
   "remoteUser": "vscode"
 }
