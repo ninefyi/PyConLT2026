@@ -8,3 +8,4 @@ __pycache__/
 *.egg
 .venv/
 AI_CONTEXT.md
+slides.html

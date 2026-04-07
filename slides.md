@@ -122,7 +122,7 @@ Piti Champeethong
 
 ---
 
-# What Vector Search Does Well
+# Vector Search can do well
 
 - Finds semantically similar text.
 - Handles paraphrases and related concepts.
@@ -136,7 +136,7 @@ Example:
 
 ---
 
-# Where Vector Search Fails
+# Vector Search can not do well
 
 - Exact keywords may be diluted in dense embeddings.
 - Acronyms can be ambiguous.
@@ -149,7 +149,7 @@ Examples:
 
 ---
 
-# Why Vector-Only RAG Misses Useful Context
+# What happens when only using Vector search
 
 Query:
 
@@ -310,7 +310,7 @@ Same three documents, normalized to 0–1, weights `w1 = 0.5, w2 = 0.5`:
 
 **Final ranking:** Doc A → Doc B → Doc C
 
-**⚠️ Warning:** RSF breaks without normalization—scores from different systems often have different scales.
+**Warning:** RSF breaks without normalization—scores from different systems often have different scales.
 
 ---
 
