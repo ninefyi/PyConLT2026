@@ -347,9 +347,9 @@ def reciprocal_rank_fusion(result_lists, k=60):
 
 ---
 
-# MongoDB 8.0+: Native RRF with `$rankFusion`
+# MongoDB 8.2+: Native RRF with `$rankFusion`
 
-MongoDB 8.0 ships `$rankFusion` as a built-in aggregation stage.
+MongoDB 8.2 ships `$rankFusion` as a built-in aggregation stage.
 
 No custom fusion code needed — the database handles it natively.
 
