@@ -10,39 +10,40 @@ description: PyCon LT 2026 talk deck
 
 <style>
 section {
-  font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
-  color: #10233f;
+  font-family: "Akzidenz Grotesk Pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  color: #001e2b;
   background:
-    radial-gradient(circle at 85% 10%, #d9f1ff 0%, #d9f1ff 14%, transparent 15%),
-    radial-gradient(circle at 12% 88%, #ffe9d6 0%, #ffe9d6 11%, transparent 12%),
-    linear-gradient(135deg, #f7fbff 0%, #eef7ff 45%, #f9fcff 100%);
+    radial-gradient(circle at 86% 11%, #d4f7e7 0%, #d4f7e7 13%, transparent 14%),
+    radial-gradient(circle at 10% 86%, #e7fbf3 0%, #e7fbf3 10%, transparent 11%),
+    linear-gradient(135deg, #ffffff 0%, #f3f8f6 48%, #eef5f2 100%);
 }
 
 h1,
 h2,
 h3 {
-  color: #0e2a66;
+  color: #001e2b;
   font-weight: 700;
 }
 
 strong {
-  color: #1f5fbf;
+  color: #00a35c;
 }
 
 code,
 pre,
 kbd,
 samp {
-  font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+  font-family: "Source Code Pro", "Menlo", "Consolas", "Courier New", monospace;
 }
 
 pre {
-  background: #f3f8ff;
-  border: 1px solid #c8dcff;
+  background: #1c2d38;
+  border: 1px solid #3d4f58;
   border-radius: 10px;
   padding: 12px;
   font-size: 0.73em;
   line-height: 1.4;
+  color: #71f6ba;
 }
 
 table {
@@ -52,19 +53,23 @@ table {
 }
 
 table th {
-  background: #0e2a66;
+  background: #112733;
   color: #ffffff;
 }
 
 table th,
 table td {
-  border: 1px solid #c6d8f3;
+  border: 1px solid #d2ddd8;
   padding: 4px 8px;
 }
 
+table td {
+  background: #f9fbfa;
+}
+
 blockquote {
-  border-left: 6px solid #f59f3a;
-  background: #fff5ea;
+  border-left: 6px solid #00ed64;
+  background: #e3fcf7;
   padding: 8px 14px;
 }
 </style>
