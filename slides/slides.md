@@ -80,7 +80,9 @@ PyCon LT 2026
 
 Piti Champeethong
 
-10-Apr-2026
+AI Day: 10-Apr-2026
+
+LinkedIn: https://www.linkedin.com/in/pitichampeethong/
 
 ---
 
